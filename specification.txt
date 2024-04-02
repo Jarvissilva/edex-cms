@@ -1,0 +1,176 @@
+Pages
+- CollegeSetup & UserLogin - /  - DONE | AUTHORIZED
+- VerifyLogin - /verify-login - DONE | AUTHORIZED
+- Dashboard - /dashboard 
+- Profile - /profile - DONE
+
+// Courses
+- ViewCourses - /dashboard/courses - DONE
+- NewCourse - /dashboard/courses/new - DONE
+- EditCourse - /dashboard/courses/:course/edit - DONE
+- ViewCourse - /dashboard/courses/:course - DONE
+
+// Classrooms 
+- NewClassroom - /dashboard/courses/:course/classroom/new - DONE
+- EditClassroom - /dashboard/courses/:course/classroom/:id/edit - DONE
+- ViewClassroom - /dashboard/courses/:course/classroom/:id - DONE
+
+// Students 
+- NewStudent - /dashboard/courses/:course/classroom/:id/student/new - DONE
+- EditStudent - /dashboard/courses/:course/classroom/:id/student/:id/edit - DONE 
+
+// Subjects
+- NewSubject - /dashboard/courses/:course/classroom/:id/subject/new - DONE
+- EditSubject - /dashboard/courses/:course/classroom/:id/subject/:id/edit - DONE
+- ViewSubject - /dashboard/courses/:course/classroom/:id/subject/:id 
+
+// Attendance
+- NewAttendance - /dashboard/courses/:course/classroom/:id/subject/:id/attendance/new - DONE
+- EditAttendance - /dashboard/courses/:course/classroom/:id/subject/:id/attendance/edit - DONE
+- ViewAttendance - /dashboard/courses/:course/classroom/:id/subject/:id/attendance - DONE 
+
+// Exams
+- ViewExams - /dashboard/courses/:course/classroom/:id/exams - DONE
+- NewExam - /dashboard/courses/:course/classroom/:id/exams/new 
+- ViewExam - /dashboard/courses/:course/classroom/:id/exams/:id 
+- EditStudentMarks - /dashboard/courses/:course/classroom/:id/exams/:id/marks/:id/edit/:id 
+- NewMarks - /dashboard/courses/:course/classroom/:id/subject/:id/exam/:id/marks/new 
+- EditMarks - /dashboard/courses/:course/classroom/:id/subject/:id/exam/:id/marks/edit 
+- ViewMarks - /dashboard/courses/:course/classroom/:id/subject/:id/exam/:id/marks 
+
+// Teachers
+- NewTeacher - /dashboard/teachers/new - DONE
+- EditTeacher - /dashboard/teachers/edit/:id - DONE
+- ViewTeachers - /dashboard/teachers
+
+
+# User Access
+- Admin
+ - Access to all courses 
+- Teacher
+  - CourseHead
+   - Access to particular course and its classrooms
+  - ClassroomHead
+   - Access to particular classroom and its subjects 
+  - SubjectTeacher
+   - Access to subject
+- Student 
+  - Access to its attendance and marks
+
+// Not finalized models
+- Insights
+- Subject notes and updates sharing
+
+
+# Tasks remaining to do
+- Add authorization to pages
+- Create dashboard page
+
+# not imp
+- Make web app mobile responsive. 
+- fix attendance percentage display on view and edit page
+
+Actions
+- College - 
+- Auth - Login, Verify, getLoggedUser
+- Users - Create, Edit, Delete
+- Courses - Create, Edit, Delete
+- Classrooms - Create, Edit, Delete
+- Attendance
+- Marks
+
+Models
+- User
+  - name
+  - email
+  - role - ["admin", "teacher", "student"]
+- College
+  - name
+  - heads - [admin users only]
+- Course
+  - name
+  - short_name
+  - duration
+  - semesters
+  - heads:[teachers users only]
+- Classroom
+    - courseID
+    - course-year
+    - class_sem
+    - division
+    - students[
+      store student users id
+    ]
+  - heads:[teachers users only]
+- Subject
+    - classroomID
+    - name
+    - teachers[teachers who teaching the subject]
+    - excluded_students - who have opted out of the subject
+    - heads:[teachers users only]
+    - resources - notes or other material shared by the teacher
+
+
+Users
+- Teachers
+  - Take Attendance
+  - Edit Attendance
+  - View Attendance
+  - Add Marks 
+  - Insights
+- Student
+  - Enrolled course
+  - Which Classroom
+  - View Attendance
+  - View Marks
+
+
+
+
+
+
+
+
+Pages
+- CollegeSetup & UserLogin - /  - If college is not setuped then collegeSetup will display else UserLogin will show this will be a common login page for all users
+- VerifyLogin - /verify-login - it verifies the jwt token from the verification link from the email
+- Dashboard - /dashboard - after logging in it redirects to dashboard where user can manage
+- Profile - /profile - display current logged user details
+
+// Courses
+- ViewCourses - /dashboard/courses - display all courses of the collge it will also have new course button going to new course page
+- NewCourse - /dashboard/courses/new - display a form to create new course only admin users can create courses
+- EditCourse - /dashboard/courses/:course/edit - display edit form only course head and admins can edit
+- ViewCourse - /dashboard/courses/:course - display classrooms, edit course button and new classroom button
+
+// Classroom 
+- NewClassroom - /dashboard/courses/:course/classroom/new - display a form to create new classroom only admin and course heads can create courses
+- EditClassroom - /dashboard/courses/:course/classroom/:id/edit - display edit form only course head, classroom head and admins can edit
+- ViewClassroom - /dashboard/courses/:course/classroom/:id - display subjects added to the classrooms, edit classroom button and also new subject button
+
+// Subject
+- NewSubject - /dashboard/courses/:course/classroom/:id/subject/new - display a form to create new subject only admin and course heads, classroom heads can create subject
+- EditSubject - /dashboard/courses/:course/classroom/:id/subject/:id/edit - display edito form for subject
+- ViewSubject - /dashboard/courses/:course/classroom/:id/subject/:id - display subject details like students, teachers, add material button ,and display materials teacher uploaded, also it will have link to attendance and marks of students.
+
+// Teachers
+- ViewTeachers - /dashboard/teachers - display list of teachers only accessible to admins, course heads, classroom heads according to level only it filter and display teachers with their info and edit button
+- NewTeacher - /dashboard/teachers/new - new teacher form
+- EditTeacher - /dashboard/teachers/:id/edit
+- ViewTeacher - /dashboard/teachers/:id
+
+// Students
+- ViewStudents- /dashboard/students
+- NewStudent - /dashboard/students/new 
+- EditStudent - /dashboard/students/:id/edit
+- ViewStudent - /dashboard/students/:id
+
+// Students Attendance
+- ViewAttendance - /dashboard/attendance 
+- NewAttendance - /dashboard/attendance/new
+- EditAttendance - /dashboard/attendance/:id/edit
+
+// Students Marks
+- ViewMarks - /dashboard/marks 
+- NewMarks - /dashboard/marks/new
+- EditMarks - /dashboard/marks/:id/edit
